@@ -1,0 +1,18 @@
+<div class="row form-container">
+  <div class="card-elem col-3">
+    <h2>Bienvenue</h2>
+    <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
+      <label for="username">
+        Nom d'utilsateur
+        <input name="username" ngModel required />
+      </label>
+      <label for="password"
+        >Mot de passe
+        <input type="password" name="password" ngModel required />
+      </label>
+      <button type="button" class="btn btn-primary btn_connexion">
+        Connexion
+      </button>
+    </form>
+  </div>
+</div>
