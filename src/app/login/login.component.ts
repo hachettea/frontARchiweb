@@ -38,10 +38,12 @@ export class LoginComponent implements OnInit {
         .subscribe(
           (res) => {
             this.me = res;
+            localStorage.setItem('lastConnection', JSON.stringify(new Date()));
             // @ts-ignore;
             $('.toast').toast('show');
           },
           (e) => {
+            // @ts-ignore;
             $('.toast').toast('show');
           }
         );
