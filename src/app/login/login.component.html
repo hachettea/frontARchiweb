@@ -1,18 +1,20 @@
-<div class="row form-container">
-  <div class="card-elem col-3">
-    <h2>Bienvenue</h2>
-    <form #form="ngForm" (ngSubmit)="onSubmit(form)" novalidate>
-      <label for="username">
-        Nom d'utilsateur
-        <input name="username" ngModel required />
+<div class="row justify-content-center align-items-center">
+  <div class="col-md-12 col-lg-7 left-pannel">
+    <h1 class="title_login text-center">ceri game</h1>
+    <h1 class="subtitle_login text-center">Le jeu qui déchire un max!</h1>
+  </div>
+  <div class="col-md-12 col-lg-5 right-pannel">
+    <div class="card-elem">
+      <h2 class="text-center">Bienvenue</h2>
+      <label for="username"
+        >Nom d'utilisateur
+        <input placeholder="alexhach" type="text" />
       </label>
       <label for="password"
         >Mot de passe
-        <input type="password" name="password" ngModel required />
+        <input placeholder="********" type="password" />
       </label>
-      <button type="button" class="btn btn-primary btn_connexion">
-        Connexion
-      </button>
-    </form>
+      <button class="btn btn-primary">Connexion</button>
+    </div>
   </div>
 </div>

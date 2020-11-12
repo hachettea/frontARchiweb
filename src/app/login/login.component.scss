@@ -1,37 +1,63 @@
-.form-container {
-  justify-content: center;
-  top: 50%;
-  position: relative;
-  transform: translateY(-50%);
+@import "../../variables.scss";
+
+.row {
+  height: 100%;
+}
+
+.title_login {
+  text-transform: uppercase;
+  font-family: Poppins;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 150px;
+  line-height: 225px;
+  color: $primary;
+  text-shadow: 8px 8px 0px rgba(0, 0, 0, 1);
+  -webkit-text-stroke-width: 7px;
+  -webkit-text-stroke-color: black;
+}
+
+.subtitle_login {
+  font-family: Poppins;
+  font-style: italic;
+  font-weight: 800;
+  font-size: 80px;
+  line-height: 120px;
   text-align: center;
+  color: #333333;
+}
+
+.left-pannel,
+.right-pannel {
+  padding: 0 3rem;
+}
+
+.right-pannel {
+  display: flex;
+  justify-content: center;
+
+  .card-elem {
+    width: 60%;
+  }
 
   h2 {
     margin-bottom: 2rem;
-    font-weight: 600;
   }
 
-  label {
-    margin-top: 1rem;
+  label,
+  input {
     display: block;
-    input {
-      display: block;
-      width: 80%;
-      margin: auto;
-    }
+    width: 100%;
   }
-}
 
-.btn_connexion {
-  display: block;
-  margin: auto;
-  margin-top: 2rem;
-  font-weight: 600;
-  font-size: 1.5rem;
-  padding: 0.5rem 1rem;
-}
+  input {
+    margin-bottom: 1rem;
+    margin: auto;
+  }
 
-svg {
-  position: absolute;
-  bottom: 0;
-  z-index: -50;
+  .btn-primary {
+    margin: auto;
+    margin-top: 2rem;
+    display: block;
+  }
 }
