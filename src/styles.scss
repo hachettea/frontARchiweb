@@ -55,3 +55,6 @@ h3 {
   border: $primary !important;
   box-shadow: none !important;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
