@@ -1,3 +1,4 @@
 export const environment = {
-  production: true
+  production: true,
+  host: 'http://pedago.univ-avignon.fr:3057/',
 };
