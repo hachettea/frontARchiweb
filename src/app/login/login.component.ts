@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/models/user.model';
 import { AuthService } from '../services/auth.service';
 
@@ -15,7 +16,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private readonly authService: AuthService
+    private readonly authService: AuthService,
+    private toastr: ToastrService
   ) {}
 
   ngOnInit(): void {
@@ -39,13 +41,9 @@ export class LoginComponent implements OnInit {
           (res) => {
             this.me = res;
             localStorage.setItem('lastConnection', JSON.stringify(new Date()));
-            // @ts-ignore;
-            $('.toast').toast('show');
+            this.toastr.success(`Bienvenue ${res.username} !!!`, 'Connecté');
           },
-          (e) => {
-            // @ts-ignore;
-            $('.toast').toast('show');
-          }
+          (e) => {}
         );
     }
   }

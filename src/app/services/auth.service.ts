@@ -11,9 +11,13 @@ export class AuthService {
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<UserModel> {
-    return this.http.post<UserModel>(`${environment.host}/login`, {
-      username,
-      password,
-    });
+    return this.http.post<UserModel>(
+      `${environment.host}/login`,
+      {
+        username,
+        password,
+      },
+      { withCredentials: true }
+    );
   }
 }
