@@ -32,4 +32,10 @@ export class AuthService {
       { withCredentials: true }
     );
   }
+
+  getInfos(): Observable<UserModel> {
+    return this.http.get<UserModel>(`${environment.host}/login`, {
+      withCredentials: true,
+    });
+  }
 }

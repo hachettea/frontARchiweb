@@ -13,10 +13,27 @@ import { AuthService } from './services/auth.service';
   providedIn: 'root',
 })
 export class VerifyUserGuard implements CanActivate {
+  private targetRoute = null;
+
   constructor(
     private authService: AuthService,
     private readonly router: Router
-  ) {}
+  ) {
+    if (!authService.connecting) {
+      authService.connexion.subscribe(
+        () => {
+          if (authService.me) {
+            router.navigateByUrl(this.targetRoute);
+          } else {
+            router.navigate(['login']);
+          }
+        },
+        (error) => {
+          router.navigate(['login']);
+        }
+      );
+    }
+  }
 
   canActivate(
     route: ActivatedRouteSnapshot,
@@ -26,7 +43,12 @@ export class VerifyUserGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    console.log(route);
+    const { url } = state;
+    if (!this.authService.me) {
+      if (this.targetRoute) {
+        this.targetRoute = url;
+      }
+    }
     if (this.authService.me !== undefined) {
       return true;
     } else {
