@@ -6,7 +6,6 @@ import {
   UrlTree,
   Router,
 } from '@angular/router';
-import { verify } from 'crypto';
 import { Observable } from 'rxjs';
 import { AuthService } from './services/auth.service';
 
@@ -27,6 +26,7 @@ export class VerifyUserGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
+    console.log(route);
     if (this.authService.me !== undefined) {
       return true;
     } else {

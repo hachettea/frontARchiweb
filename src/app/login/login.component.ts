@@ -1,5 +1,6 @@
 import { Component, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserModel } from 'src/models/user.model';
 import { AuthService } from '../services/auth.service';
@@ -15,6 +16,7 @@ export class LoginComponent implements OnInit {
   @Input() userLogged = false;
 
   constructor(
+    private router: Router,
     private fb: FormBuilder,
     private readonly authService: AuthService,
     private toastr: ToastrService
@@ -48,6 +50,7 @@ export class LoginComponent implements OnInit {
                   localStorage.getItem(res.identifiant),
                 `Bienvenue ${res.identifiant} !!!`
               );
+              this.router.navigate(['quizz']);
             } else {
               localStorage.setItem(res.identifiant, JSON.stringify(new Date()));
               this.toastr.success(
