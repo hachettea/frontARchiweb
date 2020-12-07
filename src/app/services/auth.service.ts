@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { UserModel } from 'src/models/user.model';
 import { environment } from 'src/environments/environment';
 
@@ -8,6 +8,10 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root',
 })
 export class AuthService {
+  connecting = false;
+  me: UserModel;
+  connexion = new Subject<any>();
+
   constructor(private http: HttpClient) {}
 
   login(username: string, password: string): Observable<UserModel> {
@@ -27,11 +31,5 @@ export class AuthService {
       {},
       { withCredentials: true }
     );
-  }
-
-  checkIfUserLogin() {
-    return this.http.get(`${environment.host}/login`, {
-      withCredentials: true,
-    });
   }
 }

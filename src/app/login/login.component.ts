@@ -12,30 +12,13 @@ import { AuthService } from '../services/auth.service';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   wrongCredentials = false;
-  me: UserModel;
   @Input() userLogged = false;
 
   constructor(
     private fb: FormBuilder,
     private readonly authService: AuthService,
     private toastr: ToastrService
-  ) {
-    this.checkIfUserLogin();
-  }
-
-  checkIfUserLogin() {
-    console.log('camp');
-    this.authService.checkIfUserLogin().subscribe(
-      (resp: any) => {
-        this.userLogged = resp.userLogged;
-      },
-      (errorResp) => {
-        this.toastr.error(
-          'Oops, something went wrong getting the logged in status'
-        );
-      }
-    );
-  }
+  ) {}
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -48,7 +31,7 @@ export class LoginComponent implements OnInit {
     if (!this.loginForm.valid) {
       this.wrongCredentials = true;
     } else {
-      this.me = undefined;
+      this.authService.me = undefined;
       this.authService
         .login(
           this.loginForm.controls.username.value,
@@ -57,7 +40,7 @@ export class LoginComponent implements OnInit {
         .subscribe(
           (res) => {
             this.userLogged = true;
-            this.me = res;
+            this.authService.me = res;
             console.log(res);
             if (localStorage.getItem(res.identifiant)) {
               this.toastr.success(
