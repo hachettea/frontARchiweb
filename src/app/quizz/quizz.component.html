@@ -1,15 +1,18 @@
 <div class="row justify-content-center align-items-center">
-  <div class="col-md-12 col-lg-7 left-pannel">
+  <div class="col-md-3 col-lg-3 left-pannel">
     <h1 class="title_login text-center">ceri game</h1>
     <h1 class="subtitle_login text-center">Le jeu qui déchire un max!</h1>
   </div>
-  <div *ngIf="userLogged" class="col-md-12 col-lg-5 right-pannel">
-    <button (click)="logout()" class="btn btn-primary">Deconnexion</button>
+  <div class="col-md-2 col-lg-2 right-pannel">
+    <app-profile></app-profile>
+    <!-- <div *ngIf="userLogged" class="col-md-12 col-lg-5 right-pannel">
+      <button (click)="logout()" class="btn btn-primary">Deconnexion</button>
+    </div> -->
   </div>
-  <div *ngIf="userLogged === false" class="col-md-12 col-lg-5 right-pannel">
+  <div *ngIf="" class="col-md-12 col-lg-5 right-pannel">
     <div class="card-elem">
       <h2 class="text-center">Bienvenue</h2>
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form [formGroup]="">
         <label for="username"
           >Nom d'utilisateur
           <input
@@ -27,7 +30,7 @@
           />
         </label>
         <div
-          *ngIf="wrongCredentials"
+          *ngIf=""
           class="alert alert-warning alert-dismissible fade show"
           role="alert"
         >

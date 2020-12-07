@@ -20,4 +20,18 @@ export class AuthService {
       { withCredentials: true }
     );
   }
+
+  logout() {
+    return this.http.post(
+      `${environment.host}/logout`,
+      {},
+      { withCredentials: true }
+    );
+  }
+
+  checkIfUserLogin() {
+    return this.http.get(`${environment.host}/login`, {
+      withCredentials: true,
+    });
+  }
 }

@@ -13,12 +13,29 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   wrongCredentials = false;
   me: UserModel;
+  @Input() userLogged = false;
 
   constructor(
     private fb: FormBuilder,
     private readonly authService: AuthService,
     private toastr: ToastrService
-  ) {}
+  ) {
+    this.checkIfUserLogin();
+  }
+
+  checkIfUserLogin() {
+    console.log('camp');
+    this.authService.checkIfUserLogin().subscribe(
+      (resp: any) => {
+        this.userLogged = resp.userLogged;
+      },
+      (errorResp) => {
+        this.toastr.error(
+          'Oops, something went wrong getting the logged in status'
+        );
+      }
+    );
+  }
 
   ngOnInit(): void {
     this.loginForm = this.fb.group({
@@ -39,12 +56,30 @@ export class LoginComponent implements OnInit {
         )
         .subscribe(
           (res) => {
+            this.userLogged = true;
             this.me = res;
-            localStorage.setItem('lastConnection', JSON.stringify(new Date()));
-            this.toastr.success(`Bienvenue ${res.username} !!!`, 'Connecté');
+            console.log(res);
+            if (localStorage.getItem(res.identifiant)) {
+              this.toastr.success(
+                'Tu as été Connecté pour la dernière fois le ' +
+                  localStorage.getItem(res.identifiant),
+                `Bienvenue ${res.identifiant} !!!`
+              );
+            } else {
+              localStorage.setItem(res.identifiant, JSON.stringify(new Date()));
+              this.toastr.success(
+                "C'est la premiere fois que tu te connecte",
+                `Bienvenue ${res.identifiant} !!!`
+              );
+            }
           },
           (e) => {}
         );
     }
+  }
+  logout(): void {
+    this.authService.logout().subscribe((res) => {
+      this.userLogged = false;
+    });
   }
 }
